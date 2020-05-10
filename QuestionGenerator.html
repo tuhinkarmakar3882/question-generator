@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question Maker</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/questionGenerator.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/questionGenerator.js"></script>
+</head>
+<body class="bg-light">
+
+<div class="container mt-4">
+    <div class="jumbotron bg-light text-center mt-0 pt-0">
+        <p class="display-4 mb-1"><label for="originalTextArea">Original Text : </label></p>
+        <textarea class="my-3 text-justify" id="originalTextArea"></textarea>
+        <div class="row justify-content-around">
+            <div class="col w-100">
+                <button class="btn btn-secondary customButton" onclick="convertSelection()">Convert Selection</button>
+            </div>
+            <div class="col w-100">
+                <button class="btn btn-primary customButton" onclick="renderToPuzzle()">Reload Preview</button>
+            </div>
+            <div class="col w-100">
+                <button class="btn btn-secondary customButton" onclick="revertSelection()">Revert Selection</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <hr class="border-danger my-4">
+</div>
+<div class="container">
+    <div class="jumbotron bg-light my-0 py-0">
+        <p class="display-4">Rendered View : </p>
+        <p class="lead" id="renderedView"></p>
+    </div>
+</div>
+
+</body>
+</html>

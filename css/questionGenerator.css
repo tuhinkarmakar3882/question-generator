@@ -1,0 +1,27 @@
+#originalTextArea {
+    width: 100%;
+    min-height: 10rem;
+    margin-top: 1rem;
+    padding: .8rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    transform: scale(.98);
+    transition: box-shadow 50ms ease-in-out,
+    transform .3s ease-in-out, min-height .3s ease-in-out;
+}
+
+#originalTextArea:focus {
+    box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+    transform: scale(1);
+}
+
+#originalTextArea:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+    transform: scale(1);
+}
+
+.customButton {
+    border-radius: 50px;
+    padding: .5rem 2rem;
+    margin: .5rem 1rem;
+}
