@@ -12,7 +12,7 @@
 <body class="bg-light">
 
 <div class="container mt-4">
-    <div class="jumbotron bg-light text-center mt-0 pt-0">
+    <div class="jumbotron bg-light text-center my-0 py-0">
         <p class="display-4 mb-1"><label for="originalTextArea">Original Text : </label></p>
         <textarea class="my-3 text-justify" id="originalTextArea" onkeyup="renderToPuzzle()"></textarea>
         <div class="row justify-content-around">
@@ -29,12 +29,16 @@
     </div>
 </div>
 <div class="container-fluid">
-    <hr class="border-danger my-4">
+    <hr class="border-danger my-2">
 </div>
 <div class="container">
     <div class="jumbotron bg-light my-0 py-0">
-        <p class="display-4">Rendered View : </p>
+        <p class="display-4">Rendered View :
+            <button class="btn btn-secondary customButton" onclick="exportToHTML()">Export to HTML</button>
+        </p>
+
         <p class="lead" id="renderedView"></p>
+
     </div>
 </div>
 

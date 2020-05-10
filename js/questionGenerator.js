@@ -96,3 +96,13 @@ function getPositionOfSelectedContentIn(inputArea) {
         end: end
     };
 }
+
+function exportToHTML() {
+    let fileName = 'question_sheet.html';
+    let targetElement = document.getElementById('renderedView').innerHTML;
+    let link = document.createElement('a');
+    let mimeType = 'text/plain';
+    link.setAttribute('download', fileName);
+    link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(targetElement));
+    link.click();
+}
