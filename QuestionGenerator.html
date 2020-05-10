@@ -14,7 +14,7 @@
 <div class="container mt-4">
     <div class="jumbotron bg-light text-center mt-0 pt-0">
         <p class="display-4 mb-1"><label for="originalTextArea">Original Text : </label></p>
-        <textarea class="my-3 text-justify" id="originalTextArea"></textarea>
+        <textarea class="my-3 text-justify" id="originalTextArea" onkeyup="renderToPuzzle()"></textarea>
         <div class="row justify-content-around">
             <div class="col w-100">
                 <button class="btn btn-secondary customButton" onclick="convertSelection()">Convert Selection</button>
