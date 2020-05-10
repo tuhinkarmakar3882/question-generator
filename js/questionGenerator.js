@@ -1,7 +1,8 @@
 window.onload = () => {
     $('#originalTextArea').text('The text property sets or returns the text of an option element.\n' +
         '\n' +
-        'Tip: If the value property is not specified for an option element, then the text content will be sent to the server when the container form is submitted.')
+        'Tip: If the value property is not specified for an option element, then the text content will be sent to the server when the container form is submitted.'
+        )
 };
 
 function renderToPuzzle() {
@@ -21,6 +22,7 @@ function renderToPuzzle() {
 
     function generateSelectionDropdown(text, options) {
         let htmlSelectElement = document.createElement('select');
+        htmlSelectElement.classList = 'customDropdown'
         options.forEach((option) => {
             let newOption = document.createElement('option');
             newOption.value = option;

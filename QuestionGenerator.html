@@ -1,45 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-    <meta charset="UTF-8">
+    <meta charset='UTF-8'>
     <title>Question Maker</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/questionGenerator.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/questionGenerator.js"></script>
+    <link href='css/bootstrap.min.css' rel='stylesheet'>
+    <link href='css/questionGenerator.css' rel='stylesheet'>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+    <script src='js/bootstrap.min.js'></script>
+    <script src='js/questionGenerator.js'></script>
 </head>
-<body class="bg-light">
+<body class=''>
 
-<div class="container mt-4">
-    <div class="jumbotron bg-light text-center my-0 py-0">
-        <p class="display-4 mb-1"><label for="originalTextArea">Original Text : </label></p>
-        <textarea class="my-3 text-justify" id="originalTextArea" onkeyup="renderToPuzzle()"></textarea>
-        <div class="row justify-content-around">
-            <div class="col w-100">
-                <button class="btn btn-secondary customButton" onclick="convertSelection()">Convert Selection</button>
+
+<div class='cover-container d-flex w-100 h-100 p-3 mx-auto flex-column'>
+    <header class='masthead mb-auto'>
+        <div class='inner'>
+            <h3 class='masthead-brand'>Question Generator</h3>
+            <nav class='nav nav-masthead justify-content-center'>
+                <a class='nav-link active' href='#'>Generate</a>
+                <a class='nav-link' href='#'>Docs</a>
+                <a class='nav-link' href='#'>Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main role='main' class='inner cover'>
+        <div class="row  pt-5 justify-content-around">
+            <div class="col-12 col-lg-6">
+                <div class='jumbotron bg-transparent text-center my-0 py-0'>
+                    <p class='display-4 mb-4'><label for='originalTextArea'>Original Text : </label></p>
+                    <textarea class='mb-4 text-justify' id='originalTextArea' onkeyup='renderToPuzzle()'></textarea>
+                    <div class='row justify-content-around'>
+                        <div class='col-6'>
+                            <button class='btn btn-sm btn-success customButton' onclick='convertSelection()'>Convert
+                                Selection
+                            </button>
+                        </div>
+                        <div class='col-6'>
+                            <button class='btn btn-sm btn-success customButton' onclick='revertSelection()'>Revert
+                                Selection
+                            </button>
+                        </div>
+                        <div class='col-6'>
+                            <button class='btn btn-sm btn-success customButton' onclick='renderToPuzzle()'>Reload
+                                Preview
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col w-100">
-                <button class="btn btn-primary customButton" onclick="renderToPuzzle()">Reload Preview</button>
-            </div>
-            <div class="col w-100">
-                <button class="btn btn-secondary customButton" onclick="revertSelection()">Revert Selection</button>
+            <div class="col-12 col-lg-6 my-lg-0 my-4">
+                <div class='jumbotron bg-transparent my-0 py-0'>
+                    <p class='display-4 mb-4'>Rendered View : </p>
+                    <p class='lead mb-4 pt-4' id='renderedView'></p>
+                    <div class='row justify-content-center'>
+                        <div class='col text-center'>
+                            <button class='btn btn-sm btn-danger customButton mt-5' onclick='exportToHTML()'>Export to HTML
+                            </button>
+                        </div>
+                    
+                    </div>
+                    
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="container-fluid">
-    <hr class="border-danger my-2">
-</div>
-<div class="container">
-    <div class="jumbotron bg-light my-0 py-0">
-        <p class="display-4">Rendered View :
-            <button class="btn btn-secondary customButton" onclick="exportToHTML()">Export to HTML</button>
-        </p>
+    </main>
 
-        <p class="lead" id="renderedView"></p>
-
-    </div>
+    <footer class='customFooter mt-auto text-center'>
+        <div class='inner'>
+            <p>Question Generator App By <a href='https://www.linkedin.com/in/tuhinkarmakar3882/' target="_blank">Tuhin
+                Karmakar</a>.</p>
+        </div>
+    </footer>
 </div>
 
 </body>
