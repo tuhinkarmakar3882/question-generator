@@ -1,8 +1,11 @@
+let textAreaElement;
+
 window.onload = () => {
     $('#originalTextArea').text('The text property sets or returns the text of an option element.\n' +
         '\n' +
         'Tip: If the value property is not specified for an option element, then the text content will be sent to the server when the container form is submitted.'
-        )
+    )
+    textAreaElement = document.getElementById('originalTextArea');
 };
 
 function renderToPuzzle() {
@@ -63,15 +66,14 @@ function renderToPuzzle() {
 }
 
 function updateTextAreaWith(newContent) {
-    let textAreaElement = document.getElementById('originalTextArea');
     let selectionPositionIndex = getPositionOfSelectedContentIn(textAreaElement);
     textAreaElement.value = textAreaElement.value.substring(0, selectionPositionIndex['start']) + newContent + textAreaElement.value.substr(selectionPositionIndex['end']);
     renderToPuzzle()
 }
 
 function revertSelection() {
-    let selectionObject = window.getSelection();
-    let selectedText = selectionObject.toString();
+
+    let selectedText = textAreaElement.value.substring(textAreaElement.selectionStart, textAreaElement.selectionEnd);
     let newContent = selectedText;
     if (selectedText.trim() !== '') {
         newContent = selectedText.replace(/<<</g, '');
@@ -81,9 +83,9 @@ function revertSelection() {
 }
 
 function convertSelection() {
-    let selectionObject = window.getSelection();
-    let selectedText = selectionObject.toString();
+    let selectedText = textAreaElement.value.substring(textAreaElement.selectionStart, textAreaElement.selectionEnd);
     let newContent = selectedText;
+
     if (selectedText.trim() !== '') {
         newContent = '<<<' + selectedText + '>>>';
         updateTextAreaWith(newContent)
