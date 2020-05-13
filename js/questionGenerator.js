@@ -1,11 +1,9 @@
 let textAreaElement;
 
 window.onload = () => {
-    $('#originalTextArea').text('The text property sets or returns the text of an option element.\n' +
-        '\n' +
-        'Tip: If the value property is not specified for an option element, then the text content will be sent to the server when the container form is submitted.'
-    )
+
     textAreaElement = document.getElementById('originalTextArea');
+    textAreaElement.value = "The text property sets or returns the text of an option element.\n Tip: If the value property is not specified for an option element, then the text content will be sent to the server when the container form is submitted."
 };
 
 function renderToPuzzle() {
