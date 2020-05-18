@@ -1,9 +1,12 @@
 let textAreaElement;
 
 window.onload = () => {
-
     textAreaElement = document.getElementById('originalTextArea');
-    textAreaElement.value = "The text property sets or returns the text of an option element.\n Tip: If the value property is not specified for an option element, then the text content will be sent to the server when the container form is submitted."
+    textAreaElement.value = "Anything within <<<THIS BRACKETS>>> will be replaced by a DropDown!\n\n" +
+        "To get started, Delete this Placeholder Text & Type your content.\n\n" +
+        "Once you're done, select the content that you want to convert & Click on convert Selection.\n\n" +
+        "To Revert: Select the entire region & Click on Revert Selection";
+    renderToPuzzle();
 };
 
 function renderToPuzzle() {
@@ -24,6 +27,12 @@ function renderToPuzzle() {
     function generateSelectionDropdown(text, options) {
         let htmlSelectElement = document.createElement('select');
         htmlSelectElement.classList = 'customDropdown'
+        let defaultOption = document.createElement('option');
+        defaultOption.value = "Select an Option";
+        defaultOption.innerText = "Select an Option";
+        defaultOption.setAttribute('disabled', '')
+        defaultOption.setAttribute('selected', '')
+        htmlSelectElement.appendChild(defaultOption)
         options.forEach((option) => {
             let newOption = document.createElement('option');
             newOption.value = option;

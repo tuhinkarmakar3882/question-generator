@@ -12,8 +12,6 @@
     <header class='customHeader'>
         <ul class='customNav'>
             <li class='brand' style='float:left'><a href='#'>Question Generator</a></li>
-            <li style='float:right'><a href='#'>About</a></li>
-            <li style='float:right'><a href='#'>Docs</a></li>
             <li style='float:right'><a class='active' href='#'>Generator</a></li>
 
         </ul>
@@ -22,7 +20,7 @@
     <main>
         <div class='grid-container'>
             <div class='grid-item'>
-                <p class='headText'><label for='originalTextArea'>Original Text : </label></p>
+                <p class='headText'><label for='originalTextArea'>Original Text: </label></p>
                 <textarea class='customScrollbar' id='originalTextArea' onkeyup='renderToPuzzle()'></textarea>
                 <div class='btnContainer'>
                     <button class='customButton' onclick='convertSelection()'>Convert
@@ -38,7 +36,7 @@
             </div>
 
             <div class='grid-item'>
-                <p class='headText'>Rendered View : </p>
+                <p class='headText'>Rendered View: </p>
                 <p class='customScrollbar' id='renderedView'></p>
                 <div class='btnContainer'>
                     <button class='customButton' onclick='exportToHTML()'>Export to
