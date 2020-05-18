@@ -26,13 +26,17 @@ function renderToPuzzle() {
 
     function generateSelectionDropdown(text, options) {
         let htmlSelectElement = document.createElement('select');
-        htmlSelectElement.classList = 'customDropdown'
+        htmlSelectElement.classList.add('customDropdown');
+
+        //  Create a Default Option for that DropDown
         let defaultOption = document.createElement('option');
         defaultOption.value = "Select an Option";
         defaultOption.innerText = "Select an Option";
-        defaultOption.setAttribute('disabled', '')
-        defaultOption.setAttribute('selected', '')
+        defaultOption.setAttribute('disabled', '');
+        defaultOption.setAttribute('selected', '');
         htmlSelectElement.appendChild(defaultOption)
+
+        //  Append the rest of the options
         options.forEach((option) => {
             let newOption = document.createElement('option');
             newOption.value = option;
@@ -63,12 +67,13 @@ function renderToPuzzle() {
         });
     }
 
+    //  Main
     let textArea = document.getElementById('originalTextArea');
     let textAreaContent = textArea.value;
     let options = generateOptionsFrom(textAreaContent);
     let selectionDropdown = generateSelectionDropdown(textAreaContent, options)
     replaceWithDropdown(textAreaContent, selectionDropdown);
-    textArea.value = textAreaContent;
+    // textArea.value = textAreaContent;
 
 }
 
