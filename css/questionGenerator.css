@@ -139,14 +139,9 @@ option {
 }
 
 .customFooter {
-    width: 100vw;
-    padding: 10px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
     display: flex;
     justify-content: center;
-
+    align-items: center;
 }
 
 .customNav {
@@ -182,9 +177,9 @@ option {
     margin-right: auto;
 }
 
-.active {
-    text-decoration: underline !important;
-    color: crimson !important;
+.customNav li a.active {
+    text-decoration: underline;
+    color: crimson;
 }
 
 .container {
