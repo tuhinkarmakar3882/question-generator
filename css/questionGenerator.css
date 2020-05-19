@@ -6,7 +6,7 @@ body {
     color: #6F594F;
 }
 
-#originalTextArea {
+.originalTextArea {
     background: #832161;
     color: #F0EFF4;
     display: block;
@@ -28,12 +28,12 @@ body {
 
 }
 
-#originalTextArea:focus {
+.originalTextArea:focus {
     box-shadow: 0 0 20px rgba(0, 0, 0, 1);
     transform: scale(1);
 }
 
-#originalTextArea:hover {
+.originalTextArea:hover {
     box-shadow: 0 0 20px rgba(0, 0, 0, 1);
     transform: scale(1);
 }
@@ -67,7 +67,7 @@ body {
     box-shadow: 0 0 2px #1C110A;
 }
 
-#renderedView {
+.renderedView {
     max-height: 18.5rem;
     min-height: 18rem;
     overflow: auto;

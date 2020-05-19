@@ -22,7 +22,8 @@
         <div class='grid-container'>
             <div class='grid-item'>
                 <p class='headText'><label for='originalTextArea'>Original Text: </label></p>
-                <textarea class='customScrollbar' id='originalTextArea' onkeyup='renderToPuzzle()'></textarea>
+                <textarea class='customScrollbar originalTextArea' id='originalTextArea'
+                          onkeyup='renderToPuzzle()'></textarea>
                 <div class='btnContainer'>
                     <button class='customButton' onclick='convertSelection()'>Convert
                         Selection
@@ -38,8 +39,8 @@
 
             <div class='grid-item'>
                 <p class='headText'>Rendered View: </p>
-                <div class='customScrollbar' id='renderedView'>
-                    
+                <div class='customScrollbar renderedView' id='renderedView'>
+
                 </div>
                 <div class='btnContainer'>
                     <button class='customButton' onclick='exportToHTML()'>

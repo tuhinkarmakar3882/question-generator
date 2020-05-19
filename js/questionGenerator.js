@@ -3,10 +3,10 @@ let textAreaElement;
 window.onload = () => {
   textAreaElement = document.getElementById("originalTextArea");
   textAreaElement.value =
-    "Anything within <<<THIS BRACKETS>>> will be replaced by a DropDown!\n\n" +
-    "To get started, Delete this Placeholder Text & Type your content.\n\n" +
-    "Once you're done, select the content that you want to convert & Click on convert Selection.\n\n" +
-    "To Revert: Select the entire region & Click on Revert Selection";
+      "Anything within <<<THIS BRACKETS>>> will be replaced by a DropDown!\n\n" +
+      "To get started, Delete this Placeholder Text & Type your content.\n\n" +
+      "Once you're done, select the content that you want to convert & Click on convert Selection.\n\n" +
+      "To Revert: Select the entire region & Click on Revert Selection";
   renderToPuzzle();
 };
 
@@ -62,10 +62,10 @@ function renderToPuzzle() {
       if (endingSeqPosition !== -1) {
         // This Implies Match Exists
         renderedViewElement.innerHTML +=
-          " " +
-          newSpanElement.innerHTML +
-          " " +
-          segment.substr(endingSeqPosition + 3); //  replace the places with newSpanElement
+            " " +
+            newSpanElement.innerHTML +
+            " " +
+            segment.substr(endingSeqPosition + 3); //  replace the places with newSpanElement
       } else {
         renderedViewElement.innerHTML += segment; //  replace the places with newSpanElement
       }
@@ -84,16 +84,16 @@ function renderToPuzzle() {
 function updateTextAreaWith(newContent) {
   let selectionPositionIndex = getPositionOfSelectedContentIn(textAreaElement);
   textAreaElement.value =
-    textAreaElement.value.substring(0, selectionPositionIndex["start"]) +
-    newContent +
-    textAreaElement.value.substr(selectionPositionIndex["end"]);
+      textAreaElement.value.substring(0, selectionPositionIndex["start"]) +
+      newContent +
+      textAreaElement.value.substr(selectionPositionIndex["end"]);
   renderToPuzzle();
 }
 
 function revertSelection() {
   let selectedText = textAreaElement.value.substring(
-    textAreaElement.selectionStart,
-    textAreaElement.selectionEnd
+      textAreaElement.selectionStart,
+      textAreaElement.selectionEnd
   );
   let newContent = selectedText;
   if (selectedText.trim() !== "") {
@@ -105,8 +105,8 @@ function revertSelection() {
 
 function convertSelection() {
   let selectedText = textAreaElement.value.substring(
-    textAreaElement.selectionStart,
-    textAreaElement.selectionEnd
+      textAreaElement.selectionStart,
+      textAreaElement.selectionEnd
   );
   let newContent = selectedText;
 
@@ -128,23 +128,43 @@ function getPositionOfSelectedContentIn(inputArea) {
 function exportToHTML() {
   let fileName = "question_sheet.html";
   let targetElement = document.getElementById("renderedView").innerHTML;
-  targetElement += "<button id='evaluate'> Evaluate </button> ";
-  
+  targetElement += "<br> <button class='customButton' id='evaluate'> Evaluate </button> ";
+
   targetElement +=
-    "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'> </script>" +
-    "<script> " +
-    "$('#evaluate').click((event)=> {" +
-    "event.preventDefault();" +
-    "console.log('hello');" +
-    "})" +
-    "</script>";
+      "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'> </script>" +
+      "<script> " +
+      "$('#evaluate').click((event)=> {" +
+      "event.preventDefault();" +
+      "console.log('hello');" +
+      "})" +
+      "</script>";
+
+  let cssContent = "<style>" +
+      "@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');\n" +
+      "\n" +
+      ".customButton {\n" +
+      "    border-radius: 50px;\n" +
+      "    padding: .5rem 2rem;\n" +
+      "    margin: .5rem 1rem;\n" +
+      "    background: #E4D6A7;\n" +
+      "    border: none;\n" +
+      "    box-shadow: 0 0 2px #1C110A;\n" +
+      "}" +
+      "body {\n" +
+      "    font-family: 'Raleway', sans-serif;\n" +
+      "    background: #F0EEDD;\n" +
+      "    color: #6F594F;\n" +
+      "}" +
+      "</style>"
+
+  targetElement += cssContent
 
   let link = document.createElement("a");
   let mimeType = "text/plain";
   link.setAttribute("download", fileName);
   link.setAttribute(
-    "href",
-    "data:" + mimeType + ";charset=utf-8," + encodeURIComponent(targetElement)
+      "href",
+      "data:" + mimeType + ";charset=utf-8," + encodeURIComponent(targetElement)
   );
   link.click();
 }
