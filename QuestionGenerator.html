@@ -3,6 +3,7 @@
 <head>
     <meta charset='UTF-8'>
     <title>Question Maker</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
     <link href='css/questionGenerator.css' rel='stylesheet'>
     <script src='js/questionGenerator.js'></script>
 </head>
@@ -37,7 +38,9 @@
 
             <div class='grid-item'>
                 <p class='headText'>Rendered View: </p>
-                <p class='customScrollbar' id='renderedView'></p>
+                <div class='customScrollbar' id='renderedView'>
+                    
+                </div>
                 <div class='btnContainer'>
                     <button class='customButton' onclick='exportToHTML()'>
                         Export to HTML
