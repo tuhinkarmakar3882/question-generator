@@ -41,9 +41,9 @@ function renderToPuzzle() {
 
         //  Append the rest of the options
 
-        // TODO options = shuffle(options);
+        let shuffledOptions = shuffleArray(options);
 
-        options.forEach((option) => {
+        shuffledOptions.forEach((option) => {
             let newOption = document.createElement("option");
             newOption.value = option;
             newOption.innerText = option;
@@ -130,6 +130,25 @@ function getPositionOfSelectedContentIn(inputArea) {
     };
 }
 
+function shuffleArray(array) {
+    let length = array.length, temp, newIndex;
+
+    // While there remain elements to shuffle…
+    while (length) {
+
+        // Pick a remaining element…
+        newIndex = Math.floor(Math.random() * length--);
+
+        // And swap it with the current element.
+        temp = array[length];
+        array[length] = array[newIndex];
+        array[newIndex] = temp;
+    }
+
+    return array;
+}
+
+
 function exportToHTML() {
     let fileName = "question_sheet.html";
 
@@ -158,6 +177,7 @@ function exportToHTML() {
         "</script>";
 
 
+    // noinspection CssUnknownTarget
     let cssContent = "<style>" +
         "@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');\n" +
         "\n" +
