@@ -1,3 +1,4 @@
+/*noinspection CssUnknownTarget*/
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');
 
 body {
@@ -21,23 +22,12 @@ body {
     border-radius: 5px;
     font-size: 1.1rem;
     margin-bottom: .8rem;
-    transform: scale(.98);
-    transition: box-shadow 50ms ease-in-out,
-    transform .2s ease-in-out,
-    min-height .3s ease-in-out;
 
 }
 
-.originalTextArea:focus {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 1);
-    transform: scale(1);
+.originalTextArea:focus, .originalTextArea:hover {
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
 }
-
-.originalTextArea:hover {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 1);
-    transform: scale(1);
-}
-
 
 .customScrollbar::-webkit-scrollbar {
     width: 2px;
