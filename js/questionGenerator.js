@@ -18,72 +18,75 @@ function generateOptionsFrom(text) {
 
         if (endingSeqPosition !== -1) {
             // This Implies Match Exists
-            // options.push(segment.substr(0, endingSeqPosition)); // Discard the ending sequence
-            options.push(segment.substr(0, endingSeqPosition).replace(/(\r\n|\n|\r)/gm, "").replace(/[']|["]/g, " ")); // Discard the ending sequence
+            //replace single and double quotes with a space while generating the options
+            options.push(
+                segment
+                    .substr(0, endingSeqPosition)
+                    .replace(/(\r\n|\n|\r)/gm, "")
+                    .replace(/[']|["]/g, " ")
+            );
         }
     });
     return options;
 }
 
+function generateSelectionDropdown(text, options) {
+    let htmlSelectElement = document.createElement("select");
+    htmlSelectElement.classList.add("customDropdown");
+
+    //  Create a Default Option for that DropDown
+    let defaultOption = document.createElement("option");
+    defaultOption.value = "Select an Option";
+    defaultOption.innerText = "Select an Option";
+    defaultOption.setAttribute("disabled", "");
+    defaultOption.setAttribute("selected", "");
+    htmlSelectElement.appendChild(defaultOption);
+
+    //  Append the rest of the options
+
+    let shuffledOptions = shuffleArray(options);
+
+    shuffledOptions.forEach((option) => {
+        let newOption = document.createElement("option");
+        newOption.value = option;
+        newOption.innerText = option;
+        htmlSelectElement.appendChild(newOption);
+    });
+    return htmlSelectElement;
+}
+
+function replaceWithDropdown(text, dropdown) {
+    let renderedViewElement = document.getElementById("renderedView");
+    renderedViewElement.innerHTML = ""; //  Initialize
+
+    let newSpanElement = document.createElement("span"); //  Create a new Span with the Dropdown
+    newSpanElement.appendChild(dropdown);
+
+    let formattedText = text.replace(/\n/g, "<br>");
+    let textSegments = formattedText.split("<<<"); //  Parse the text into different segments
+
+    textSegments.forEach((segment) => {
+        let endingSeqPosition = segment.search(/>>>/);
+
+        if (endingSeqPosition !== -1) {
+            // This Implies Match Exists
+            renderedViewElement.innerHTML +=
+                " " +
+                newSpanElement.innerHTML +
+                " " +
+                segment.substr(endingSeqPosition + 3); //  replace the places with newSpanElement
+        } else {
+            renderedViewElement.innerHTML += segment; //  replace the places with newSpanElement
+        }
+    });
+}
+
 function renderToPuzzle() {
-
-    function generateSelectionDropdown(text, options) {
-        let htmlSelectElement = document.createElement("select");
-        htmlSelectElement.classList.add("customDropdown");
-
-        //  Create a Default Option for that DropDown
-        let defaultOption = document.createElement("option");
-        defaultOption.value = "Select an Option";
-        defaultOption.innerText = "Select an Option";
-        defaultOption.setAttribute("disabled", "");
-        defaultOption.setAttribute("selected", "");
-        htmlSelectElement.appendChild(defaultOption);
-
-        //  Append the rest of the options
-
-        let shuffledOptions = shuffleArray(options);
-
-        shuffledOptions.forEach((option) => {
-            let newOption = document.createElement("option");
-            newOption.value = option;
-            newOption.innerText = option;
-            htmlSelectElement.appendChild(newOption);
-        });
-        return htmlSelectElement;
-    }
-
-    function replaceWithDropdown(text, dropdown) {
-        let renderedViewElement = document.getElementById("renderedView");
-        renderedViewElement.innerHTML = ""; //  Initialize
-
-        let newSpanElement = document.createElement("span"); //  Create a new Span with the Dropdown
-        newSpanElement.appendChild(dropdown);
-        let formattedText = text.replace(/\n/g, "<br>");
-        let textSegments = formattedText.split("<<<"); //  Parse the text into different segments
-
-        textSegments.forEach((segment) => {
-            let endingSeqPosition = segment.search(/>>>/);
-
-            if (endingSeqPosition !== -1) {
-                // This Implies Match Exists
-                renderedViewElement.innerHTML +=
-                    " " +
-                    newSpanElement.innerHTML +
-                    " " +
-                    segment.substr(endingSeqPosition + 3); //  replace the places with newSpanElement
-            } else {
-                renderedViewElement.innerHTML += segment; //  replace the places with newSpanElement
-            }
-        });
-    }
-
-    //  Main
     let textArea = document.getElementById("originalTextArea");
     let textAreaContent = textArea.value;
     let options = generateOptionsFrom(textAreaContent);
     let selectionDropdown = generateSelectionDropdown(textAreaContent, options);
     replaceWithDropdown(textAreaContent, selectionDropdown);
-    // textArea.value = textAreaContent;
 }
 
 function updateTextAreaWith(newContent) {
@@ -100,11 +103,11 @@ function revertSelection() {
         textAreaElement.selectionStart,
         textAreaElement.selectionEnd
     );
-    let newContent = selectedText;
+
     if (selectedText.trim() !== "") {
-        newContent = selectedText.replace(/<<</g, "");
-        newContent = newContent.replace(/>>>/g, "");
-        updateTextAreaWith(newContent);
+        selectedText = selectedText.replace(/<<</g, "");
+        selectedText = selectedText.replace(/>>>/g, "");
+        updateTextAreaWith(selectedText);
     }
 }
 
@@ -113,11 +116,10 @@ function convertSelection() {
         textAreaElement.selectionStart,
         textAreaElement.selectionEnd
     );
-    let newContent = selectedText;
 
     if (selectedText.trim() !== "") {
-        newContent = "<<<" + selectedText + ">>>";
-        updateTextAreaWith(newContent);
+        selectedText = "<<<" + selectedText + ">>>";
+        updateTextAreaWith(selectedText);
     }
 }
 
@@ -192,8 +194,8 @@ function exportToHTML() {
                console.log("success") 
             },
             type: "POST"
-        })`+
-        "})"+
+        })` +
+        "})" +
         "</script>";
 
 
