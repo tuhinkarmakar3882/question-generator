@@ -173,7 +173,27 @@ function exportToHTML() {
         "counter++;" +
         "});" +
         "$('.scoreArea').text('You have Scored '+ correctAnswers + ' out of ' + expectedAnswers.length );" +
-        "})" +
+        // `$.post("https://rfzto9j6f4.execute-api.us-east-2.amazonaws.com/get_evaluation",
+        //     {
+        //         score: {
+        //             "score_obtained": correctAnswers,
+        //             "total_score": expectedAnswers.length
+        //     }}).done(response=> {console.log("response", response)})` +
+        `$.ajax({
+            url: "https://rfzto9j6f4.execute-api.us-east-2.amazonaws.com/get_evaluation",
+            headers: {
+                "content-type": 'text/plain'
+            },
+            data: {
+                score_obtained: correctAnswers,
+                total_score: expectedAnswers.length
+            },
+            success: function(){
+               console.log("success") 
+            },
+            type: "POST"
+        })`+
+        "})"+
         "</script>";
 
 
