@@ -53,7 +53,7 @@
 
         $.ajax({
             type: "POST",
-            url: "https://rfzto9j6f4.execute-api.us-east-2.amazonaws.com/get_evaluation",
+            url: "https://rfzto9j6f4.execute-api.us-east-2.amazonaws.com/get_evaluatio",
             headers: {
                 "content-type": 'text/plain'
             },
@@ -64,6 +64,9 @@
             success: function () {
                 $('.scoreArea').text('You have Scored ' + correctAnswers + ' out of ' + expectedAnswers.length);
             },
+            error: function(){
+                $('.scoreArea').text('Ouch! We ran into some problem. Try again!');
+            }
             // TODO ADD A FAIL CALLBACK
         });
     }
