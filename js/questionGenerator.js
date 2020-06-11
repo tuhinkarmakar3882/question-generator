@@ -155,39 +155,48 @@ function exportToHTML() {
 
     let expectedOptions = generateOptionsFrom(textAreaElement.value);
 
-    let targetElement = "<div id='responseText'>" + document.getElementById("renderedView").innerHTML + "</div>";
+    let downloadableContent =
+        `<div id='responseText'> 
+            ${document.getElementById("renderedView").innerHTML}
+         </div>`;
 
-    targetElement += document.querySelector('.scriptToBeDownloaded').innerHTML;
+    downloadableContent += document.querySelector('.externalLibraries').innerHTML;
 
-    let btnContainer = document.createElement('div');
-    let evaluateButton = document.createElement('button');
-    evaluateButton.classList.add('customButton');
-    evaluateButton.textContent = "Evaluate";
-    evaluateButton.setAttribute('id', 'evaluate');
-    // evaluateButton.setAttribute('onClick',
-    //     `${(event) => sayHI(event)}`
-    // );
-    // evaluateButton.addEventListener('click', ()=> {alert("hi");})
+    let injectableJS = document.querySelector('#injectableJS');
 
-    btnContainer.appendChild(evaluateButton);
+    downloadableContent +=
+        `<script defer> 
+            let expectedOptions = '${expectedOptions}';
+            ${injectableJS.innerHTML} 
+        </script>`;
 
-    targetElement += btnContainer.innerHTML;
+    downloadableContent +=
+        `<div>
+            <button class="customButton" id="evaluate"> Evaluate </button>
+        </div>`;
 
-    targetElement += `<div> <h3 class='scoreArea'> </h3></div>`;
-
-
-    // noinspection CssUnknownTarget
-    let cssContent = document.querySelector('.stylesToBeDownloaded').innerHTML;
-
-    targetElement += cssContent
+    downloadableContent +=
+        `<div> 
+            <h3 class='scoreArea'></h3>
+        </div>`;
 
 
+    // Append the CSS
+    let injectableCSS = document.getElementById('injectableCSS');
+
+    downloadableContent +=
+        `<style>
+            ${injectableCSS.innerHTML}
+        </style>`;
+
+
+    //  Generate a link and Download
     let link = document.createElement("a");
     let mimeType = "text/plain";
     link.setAttribute("download", fileName);
     link.setAttribute(
         "href",
-        "data:" + mimeType + ";charset=utf-8," + encodeURIComponent(targetElement)
+        "data:" + mimeType + ";charset=utf-8," + encodeURIComponent(downloadableContent)
     );
     link.click();
 }
