@@ -3,12 +3,74 @@
 <head>
     <meta charset='UTF-8'>
     <title>Question Maker</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href='css/questionGenerator.css' rel='stylesheet'>
     <script src='js/questionGenerator.js'></script>
 </head>
 
 <body>
+<div class="scriptToBeDownloaded">
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+
+    <script defer >
+
+        document.getElementById('evaluate').addEventListener('click',()=>{sayHI()})
+
+        function sayHI() {
+            alert('hi')
+        }
+        function evaluate(event, expectedOptions) {
+            event.preventDefault();
+            alert("yo!");
+            let expectedAnswers = expectedOptions.split(',');
+
+            let actualAnswers = document.querySelectorAll('.customDropdown');
+
+            let counter = 0, correctAnswers = 0;
+            actualAnswers.forEach((answer) => {
+                if (answer.value === expectedAnswers[counter]) {
+                    correctAnswers++;
+                }
+                counter++;
+            });
+
+            $.ajax({
+                url: "https://rfzto9j6f4.execute-api.us-east-2.amazonaws.com/get_evaluation",
+                headers: {
+                    "content-type": 'text/plain'
+                },
+                data: {
+                    score_obtained: correctAnswers,
+                    total_score: expectedAnswers.length
+                },
+                success: function () {
+                    $('.scoreArea').text('You have Scored ' + correctAnswers + ' out of ' + expectedAnswers.length);
+                },
+                type: "POST"
+            });
+        }
+    </script>
+</div>
+<div class="stylesToBeDownloaded">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');
+
+        .customButton {
+            border-radius: 50px;
+            padding: .5rem 2rem;
+            margin: .5rem 1rem;
+            background: #E4D6A7;
+            border: none;
+            box-shadow: 0 0 2px #1C110A;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: #F0EEDD;
+            color: #6F594F;
+        }
+    </style>
+</div>
 <div class="container">
     <nav>
         <ul class='customNav'>

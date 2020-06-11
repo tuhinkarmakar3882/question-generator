@@ -150,73 +150,34 @@ function shuffleArray(array) {
     return array;
 }
 
-
 function exportToHTML() {
     let fileName = "question_sheet.html";
 
     let expectedOptions = generateOptionsFrom(textAreaElement.value);
 
     let targetElement = "<div id='responseText'>" + document.getElementById("renderedView").innerHTML + "</div>";
-    targetElement += "<br> <button class='customButton' id='evaluate'> Evaluate </button> <div> <h3 class='scoreArea'> </h3></div>";
-    targetElement +=
-        "\n<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'> </script>" +
-        "\n<script> " +
-        "let expectedAnswers = '" + expectedOptions + "'.split(',');" +
 
-        "$('#evaluate').click((event)=> {" +
-        "event.preventDefault();" +
-        "let actualAnswers = document.querySelectorAll('.customDropdown');" +
+    targetElement += document.querySelector('.scriptToBeDownloaded').innerHTML;
 
-        "let counter = 0, correctAnswers = 0;" +
-        "actualAnswers.forEach((answer)=>{" +
-        "if(answer.value === expectedAnswers[counter]) {" +
-        "correctAnswers++;" +
-        "}" +
-        "counter++;" +
-        "});" +
-        "$('.scoreArea').text('You have Scored '+ correctAnswers + ' out of ' + expectedAnswers.length );" +
-        // `$.post("https://rfzto9j6f4.execute-api.us-east-2.amazonaws.com/get_evaluation",
-        //     {
-        //         score: {
-        //             "score_obtained": correctAnswers,
-        //             "total_score": expectedAnswers.length
-        //     }}).done(response=> {console.log("response", response)})` +
-        `$.ajax({
-            url: "https://rfzto9j6f4.execute-api.us-east-2.amazonaws.com/get_evaluation",
-            headers: {
-                "content-type": 'text/plain'
-            },
-            data: {
-                score_obtained: correctAnswers,
-                total_score: expectedAnswers.length
-            },
-            success: function(){
-               console.log("success") 
-            },
-            type: "POST"
-        })` +
-        "})" +
-        "</script>";
+    let btnContainer = document.createElement('div');
+    let evaluateButton = document.createElement('button');
+    evaluateButton.classList.add('customButton');
+    evaluateButton.textContent = "Evaluate";
+    evaluateButton.setAttribute('id', 'evaluate');
+    // evaluateButton.setAttribute('onClick',
+    //     `${(event) => sayHI(event)}`
+    // );
+    // evaluateButton.addEventListener('click', ()=> {alert("hi");})
+
+    btnContainer.appendChild(evaluateButton);
+
+    targetElement += btnContainer.innerHTML;
+
+    targetElement += `<div> <h3 class='scoreArea'> </h3></div>`;
 
 
     // noinspection CssUnknownTarget
-    let cssContent = "<style>" +
-        "@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');\n" +
-        "\n" +
-        ".customButton {\n" +
-        "    border-radius: 50px;\n" +
-        "    padding: .5rem 2rem;\n" +
-        "    margin: .5rem 1rem;\n" +
-        "    background: #E4D6A7;\n" +
-        "    border: none;\n" +
-        "    box-shadow: 0 0 2px #1C110A;\n" +
-        "}" +
-        "body {\n" +
-        "    font-family: 'Raleway', sans-serif;\n" +
-        "    background: #F0EEDD;\n" +
-        "    color: #6F594F;\n" +
-        "}" +
-        "</style>"
+    let cssContent = document.querySelector('.stylesToBeDownloaded').innerHTML;
 
     targetElement += cssContent
 
