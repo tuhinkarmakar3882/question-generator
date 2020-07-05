@@ -38,6 +38,13 @@
         })
     }
 
+    function invalid(text) {
+        if(text.trim().length) {
+            return (text.trim().match(/[^A-Za-z\s]/));
+        }
+        return true;
+    }
+
     function evaluate() {
         let expectedAnswers = expectedOptions.split(',');
 
@@ -51,24 +58,33 @@
             counter++;
         });
 
-        $.ajax({
-            type: "POST",
-            url: "https://rfzto9j6f4.execute-api.us-east-2.amazonaws.com/get_evaluatio",
-            headers: {
-                "content-type": 'text/plain'
-            },
-            data: {
-                score_obtained: correctAnswers,
-                total_score: expectedAnswers.length
-            },
-            success: function () {
-                $('.scoreArea').text('You have Scored ' + correctAnswers + ' out of ' + expectedAnswers.length);
-            },
-            error: function(){
-                $('.scoreArea').text('Ouch! We ran into some problem. Try again!');
-            }
-            // TODO ADD A FAIL CALLBACK
-        });
+        let username = document.getElementById("username").value.trim();
+
+        if(!invalid(username)) {
+
+            $.ajax({
+                type: "POST",
+                url: "https://rfzto9j6f4.execute-api.us-east-2.amazonaws.com/get_evaluatio",
+                headers: {
+                    "content-type": 'text/plain'
+                },
+                data: {
+                    score_obtained: correctAnswers,
+                    total_score: expectedAnswers.length,
+                    username: username,
+                },
+                success: function () {
+                    $('.scoreArea').text('You have Scored ' + correctAnswers + ' out of ' + expectedAnswers.length);
+                },
+                error: function(){
+                    $('.scoreArea').text('Ouch! We ran into some problem. Try again!');
+                }
+            });
+        } else {
+            $('.scoreArea').text('Enter a Valid Username');
+        }
+
+
     }
 
 </script>

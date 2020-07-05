@@ -156,7 +156,11 @@ function exportToHTML() {
     let expectedOptions = generateOptionsFrom(textAreaElement.value);
 
     let downloadableContent =
-        `<div id='responseText'> 
+        `
+        <div class="information">
+            <input type="text" placeholder="Enter Your Name" id="username"/>
+        </div>
+        <div id='responseText'> 
             ${document.getElementById("renderedView").innerHTML}
          </div>`;
 
@@ -172,6 +176,7 @@ function exportToHTML() {
 
     downloadableContent +=
         `<div>
+        
             <button class="customButton" id="evaluate"> Evaluate </button>
         </div>`;
 
